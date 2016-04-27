@@ -13,11 +13,4 @@ Thumbs.db
 *.user
 
 .idea/
-
-
-
-
-
-
-
- 
+node_modules
