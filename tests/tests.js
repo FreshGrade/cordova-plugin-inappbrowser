@@ -459,6 +459,10 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         '<p/> <div id="openInvalidMissing"></div>' +
         'Expected result: fail to load in InAppBrowser (404).';
 
+    var url_scheme_tests = '<h1>URL Scheme</h1>' +
+        '<div id="openUrlScheme"></div>' +
+        'Expected result: Open in InAppBrowser and then click the URL Scheme button to open freshgrade student app.';
+
     var css_js_injection_tests = '<h1>CSS / JS Injection</h1>' +
         '<div id="openOriginalDocument"></div>' +
         'Expected result: open successfully in InAppBrowser without text "Style updated from..."' +
@@ -526,11 +530,11 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     if (window.MSApp && window.MSApp.execUnsafeLocalFunction) {
         MSApp.execUnsafeLocalFunction(function () {
             contentEl.innerHTML = info_div + platform_info + local_tests + white_listed_tests + non_white_listed_tests + page_with_redirects_tests + pdf_url_tests + invalid_url_tests +
-                css_js_injection_tests + open_hidden_tests + clearing_cache_tests + video_tag_tests + local_with_anchor_tag_tests + hardwareback_tests;
+                url_scheme_tests + css_js_injection_tests + open_hidden_tests + clearing_cache_tests + video_tag_tests + local_with_anchor_tag_tests;
         });
     } else {
         contentEl.innerHTML = info_div + platform_info + local_tests + white_listed_tests + non_white_listed_tests + page_with_redirects_tests + pdf_url_tests + invalid_url_tests +
-            css_js_injection_tests + open_hidden_tests + clearing_cache_tests + video_tag_tests + local_with_anchor_tag_tests + hardwareback_tests;
+            url_scheme_tests + css_js_injection_tests + open_hidden_tests + clearing_cache_tests + video_tag_tests + local_with_anchor_tag_tests + hardwareback_tests;
     }
 
     document.getElementById('user-agent').textContent = navigator.userAgent;
@@ -660,7 +664,12 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         doOpen('nonexistent.html', '_blank');
     }, 'openInvalidMissing');
 
-    // CSS / JS injection
+    //URL Scheme
+    createActionButton('URL Scheme', function () {
+        doOpen(urlSchemehtml, '_blank');
+    }, 'openUrlScheme');
+
+    //CSS / JS injection
     createActionButton('Original Document', function () {
         doOpen(injecthtml, '_blank');
     }, 'openOriginalDocument');
